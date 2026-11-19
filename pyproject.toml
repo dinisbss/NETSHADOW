@@ -38,30 +38,43 @@ dev = [
 [project.scripts]
 netshadow = "interface.cli:main"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 where = ["."]
-namespaces = true
+namespaces = false
 include = [
-    "config*",
-    "core*",
-    "interface*",
-    "engines*",
-    "modules*",
-    "security*",
-    "database*",
-    "profiles*",
-    "monitoring*",
-    "intelligence*",
-    "reports*"
+    "config",
+    "core",
+    "interface",
+    "interface.commands",
+    "engines",
+    "engines.device_engine",
+    "engines.discovery_engine",
+    "engines.monitoring_engine",
+    "engines.network_engine",
+    "engines.port_engine",
+    "engines.rust_bridge",
+    "engines.security_engine",
+    "engines.service_engine",
+    "modules",
+    "security",
+    "database",
+    "database.repositories",
+    "profiles",
+    "monitoring",
+    "intelligence",
+    "reports"
 ]
 exclude = [
-    "tests*",
-    "data*",
-    "logs*",
-    "docs*",
-    "scripts*",
-    "dashboard*",
-    "rust*"
+    "tests",
+    "data",
+    "logs",
+    "docs",
+    "scripts",
+    "dashboard",
+    "rust"
 ]
 
 [[tool.setuptools-rust.ext-modules]]
