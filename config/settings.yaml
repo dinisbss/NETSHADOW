@@ -1,0 +1,70 @@
+
+application:
+  name: NETSHADOW
+  description: "Network Intelligence & Security Auditing"
+  version: "1.0.0"
+  environment: production
+  debug: false
+
+runtime:
+  default_mode: SAFE
+  supported_modes:
+    - SAFE
+    - AUDIT
+    - MONITOR
+
+  startup_checks: true
+  graceful_shutdown: true
+
+platform:
+  windows: true
+  linux: true
+  kali_linux: true
+
+database:
+  engine: sqlite
+  path: data/netshadow.db
+  timeout: 5.0
+  foreign_keys: true
+  wal_mode: true
+
+logging:
+  enabled: true
+  level: INFO
+  directory: logs
+  filename: netshadow.log
+  max_size_mb: 10
+  backup_count: 5
+
+security:
+  secure_by_default: true
+  require_authorization: true
+  allow_silent_privilege_escalation: false
+  validate_inputs: true
+  audit_logging: true
+
+network:
+  active_operations_enabled: false
+  require_explicit_scope: true
+  default_timeout: 5
+  maximum_targets: 256
+
+monitoring:
+  enabled: true
+  interval_seconds: 60
+  history_enabled: true
+
+reports:
+  output_directory: reports/generated
+  default_format: JSON
+
+storage:
+  data_directory: data
+  backup_directory: data/backups
+  export_directory: data/exports
+
+interface:
+  language: pt-PT
+  color: true
+  show_banner: true
+  show_progress: true

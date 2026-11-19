@@ -1,0 +1,24 @@
+
+[package]
+name = "netshadow-rust"
+version = "1.0.0"
+edition = "2021"
+description = "Rust core library for NETSHADOW network intelligence and security auditing"
+license = "MIT"
+
+[lib]
+name = "netshadow_rust"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pyo3 = { version = "0.23", features = ["extension-module"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+[profile.dev]
+opt-level = 0
+debug = true

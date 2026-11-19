@@ -1,0 +1,61 @@
+
+security:
+  profile: strict
+  secure_by_default: true
+
+  authorization:
+    required: true
+    require_explicit_confirmation: true
+    require_scope_definition: true
+    reject_unspecified_targets: true
+    allow_implicit_authorization: false
+
+  privileges:
+    automatic_elevation: false
+    allow_privilege_escalation: false
+    require_manual_approval: true
+
+  input_validation:
+    enabled: true
+    reject_invalid_ips: true
+    reject_invalid_networks: true
+    reject_path_traversal: true
+    maximum_input_length: 4096
+
+  operations:
+    default_mode: SAFE
+    active_operations_enabled: false
+    require_authorization_reference: true
+    maximum_concurrent_operations: 2
+    operation_timeout_seconds: 30
+
+  rate_limiting:
+    enabled: true
+    maximum_requests_per_minute: 30
+    cooldown_seconds: 10
+
+  data_protection:
+    redact_secrets: true
+    avoid_sensitive_data_logging: true
+    restrict_file_permissions: true
+    secure_temporary_files: true
+
+  database:
+    parameterized_queries_required: true
+    foreign_keys_required: true
+    transaction_rollback_on_error: true
+
+  logging:
+    security_events_enabled: true
+    record_authorization_decisions: true
+    record_failed_validations: true
+    never_log_passwords: true
+    never_log_tokens: true
+
+  integrity:
+    verify_configuration: true
+    verify_stored_files: true
+
+  recovery:
+    backups_enabled: true
+    preserve_original_data: true

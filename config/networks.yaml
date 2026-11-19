@@ -1,0 +1,59 @@
+
+networks:
+  defaults:
+    mode: SAFE
+    active_operations_enabled: false
+    require_explicit_authorization: true
+    require_scope_confirmation: true
+
+  validation:
+    allow_ipv4: true
+    allow_ipv6: true
+    allow_cidr_notation: true
+    reject_invalid_addresses: true
+    reject_multicast_targets: true
+    reject_unspecified_targets: true
+    maximum_targets_per_operation: 256
+
+  scope:
+    require_manual_selection: true
+    reject_targets_outside_scope: true
+    allow_public_networks: false
+    allow_private_networks: true
+    allow_loopback: true
+
+  timeouts:
+    connection_seconds: 5
+    operation_seconds: 30
+    monitoring_seconds: 10
+
+  rate_limits:
+    enabled: true
+    maximum_operations_per_minute: 30
+    maximum_concurrent_operations: 2
+
+  discovery:
+    enabled_by_default: false
+    require_authorization: true
+    maximum_devices: 256
+    store_discovered_metadata: true
+
+  monitoring:
+    enabled: true
+    default_interval_seconds: 60
+    minimum_interval_seconds: 30
+    maximum_interval_seconds: 3600
+    record_availability: true
+    record_latency: true
+    detect_configuration_changes: true
+
+  privacy:
+    store_mac_addresses: true
+    store_hostnames: true
+    collect_personal_data: false
+    redact_sensitive_metadata: true
+
+  results:
+    preserve_timestamps: true
+    store_operation_history: true
+    export_sensitive_metadata: false
