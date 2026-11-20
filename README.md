@@ -36,6 +36,6 @@ Para voltar a iniciar a aplicação depois da instalação:
 .venv/bin/netshadow start
 ```
 
-Outros comandos disponíveis: `netshadow menu`, `netshadow status`, `netshadow info` e `netshadow --help`. Executar `netshadow` sem argumentos também abre o menu interactivo.
+O comando `netshadow start` inicia a aplicação e abre o menu interactivo. Também pode abrir o menu com `netshadow menu` ou simplesmente executar `netshadow` sem argumentos. Outros comandos disponíveis: `netshadow status`, `netshadow info` e `netshadow --help`.
 
 O núcleo Python pode ser instalado sem Rust. A extensão Rust é opcional e será incluída quando o ambiente conseguir compilá-la.

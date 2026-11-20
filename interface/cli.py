@@ -99,10 +99,15 @@ class NetShadowCLI:
         try:
             result = self.application.start()
 
-            print("[OK] NETSHADOW iniciado.")
-            print(f"Estado: {result}")
+            if not result:
+                print(
+                    "[ERRO] Não foi possível iniciar o NETSHADOW.",
+                    file=sys.stderr,
+                )
+                return 1
 
-            return 0
+            print("[OK] NETSHADOW iniciado.")
+            return self._run_menu()
 
         except Exception as exc:
             print(
