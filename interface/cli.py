@@ -12,6 +12,7 @@ import sys
 from typing import Optional, Sequence
 
 from core.application import NetShadowApplication
+from interface.menus import MainMenu
 
 
 VERSION = "1.0.0"
@@ -71,6 +72,11 @@ class NetShadowCLI:
         subparsers.add_parser(
             "info",
             help="Apresentar informações do NETSHADOW.",
+        )
+
+        subparsers.add_parser(
+            "menu",
+            help="Abrir o menu interactivo.",
         )
 
         return parser
@@ -158,6 +164,29 @@ class NetShadowCLI:
 
         return 0
 
+    def _run_menu(self) -> int:
+        from interface.commands.device import DeviceCommands
+        from interface.commands.monitor import MonitorCommands
+        from interface.commands.network import NetworkCommands
+        from interface.commands.reports import ReportCommands
+        from interface.commands.settings import SettingsCommands
+
+        menu = MainMenu()
+        menu.options["1"].action = NetworkCommands().display_summary
+        menu.options["2"].action = DeviceCommands().display_summary
+        menu.options["3"].action = lambda: print(
+            "\n[INFO] Security Center não tem ainda um comando CLI ligado."
+        )
+        menu.options["4"].action = MonitorCommands().display_dashboard
+        menu.options["5"].action = lambda: print(
+            "\n[INFO] AI Intelligence não tem ainda um comando CLI ligado."
+        )
+        menu.options["6"].action = ReportCommands().display_summary
+        menu.options["7"].action = SettingsCommands().display_settings
+
+        menu.run()
+        return 0
+
     def run(
         self,
         arguments: Optional[Sequence[str]] = None,
@@ -169,8 +198,7 @@ class NetShadowCLI:
 
         if not arguments:
             self._print_banner()
-            self.parser.print_help()
-            return 0
+            return self._run_menu()
 
         args = self.parser.parse_args(arguments)
 
@@ -185,6 +213,9 @@ class NetShadowCLI:
 
         if args.command == "info":
             return self._info()
+
+        if args.command == "menu":
+            return self._run_menu()
 
         self.parser.print_help()
         return 0

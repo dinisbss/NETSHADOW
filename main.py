@@ -2,7 +2,6 @@
 import logging
 import sys
 
-from core.application import NetShadowApplication
 from core.exceptions import NetShadowError
 from interface.cli import NetShadowCLI
 
@@ -23,20 +22,11 @@ def main() -> int:
 
     configure_terminal()
 
-    application = NetShadowApplication()
-
     exit_code = 0
 
     try:
-        application.initialize()
-
-        print(
-            f"\n[ SYSTEM ] {application.name} "
-            f"v{application.version}"
-        )
-
-        cli = NetShadowCLI(application)
-        cli.run()
+        cli = NetShadowCLI()
+        exit_code = cli.run()
 
     except NetShadowError as error:
         logging.getLogger("NETSHADOW").error(
@@ -59,9 +49,6 @@ def main() -> int:
         )
         print("\n[ERROR] Unexpected application error.")
         exit_code = 1
-
-    finally:
-        application.shutdown()
 
     return exit_code
 
